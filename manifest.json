@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "Veggie Chrome Extension Dev Tool",
+  "description": "Use this extension to connect to and interact with a veggie development server.",
+  "version": "1.0",
+
+  "minimum_chrome_version": "10.0",
+  "devtools_page": "popup.html",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}
