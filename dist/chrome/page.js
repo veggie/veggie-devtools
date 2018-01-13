@@ -1,5 +1,5 @@
 chrome.devtools.panels.create('Veggie',
-  'panel-icon.png',
+  'icons/panel.png',
   'panel.html',
   () => {}
 )
