@@ -1,0 +1,6 @@
+node_modules
+
+# build files
+dist/chrome/panel.html
+dist/chrome/panel.js
+dist/chrome/panel.js.map
