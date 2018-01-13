@@ -2,45 +2,37 @@
 <html>
   <head>
     <title>Veggie Chrome Extension Dev Tool</title>
-    <style type="text/css">
-      body {
-        margin: 10px;
-        white-space: nowrap;
+    <style>
+      .Veggie-popup {
+        display: inline-block;
+        min-width: 200px;
+        text-align: center;
       }
 
-      h1 {
-        font-size: 15px;
+      .Veggie-message--success,
+      .Veggie-message--failed {
+        display: none;
       }
 
-      #container {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
+      .Veggie-popup.success .Veggie-message--success {
+        display: inline-block;
+      }
+
+      .Veggie-popup.failed .Veggie-message--failed {
+        display: inline-block;
       }
     </style>
-    <script src="popup.js"></script>
   </head>
-
   <body>
-    <h1>Background Color Changer</h1>
-    <div id="container">
-      <span>Choose a color</span>
-      <select id="dropdown">
-        <option selected disabled hidden value=''></option>
-        <option value="white">White</option>
-        <option value="pink">Pink</option>
-        <option value="green">Green</option>
-        <option value="yellow">Yellow</option>
-      </select>
+    <meta charset="utf-8">
+    <div id="veggie-popup" class="Veggie-popup">
+      <p class="Veggie-message Veggie-message--failed">
+        Veggie not detected...
+      </p>
+      <p class="Veggie-message Veggie-message--success">
+        Veggie detected! Open DevTools and look for the Veggie panel.
+      </p>
     </div>
-    <script>
-      chrome.devtools.panels.create("My Panel",
-        "MyPanelIcon.png",
-        "Panel.html",
-        function(panel) {
-          // code invoked on panel creation
-        }
-      );
-    </script>
+    <script src="popup.js"></script>
   </body>
 </html>
