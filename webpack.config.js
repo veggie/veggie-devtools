@@ -4,7 +4,6 @@ const veggie = require('veggie')
 const { NamedModulesPlugin } = require('webpack')
 
 const HOST = 'localhost'
-const PORT = 8000
 const buildDir = {
   chrome: path.resolve(__dirname, 'dist/chrome')
 }
@@ -36,13 +35,12 @@ module.exports = {
   devServer: {
     index: 'panel.html',
     host: HOST,
-    port: PORT,
     contentBase: [ buildDir.chrome ],
     publicPath: '/',
     before (app) {
       app.use(veggie.router({
-        dir: 'test/services.js',
-        profileDir: 'test/profiles',
+        dir: 'services/index.js',
+        profileDir: 'services/profiles',
         repl: false
       }))
     }
