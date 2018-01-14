@@ -10,13 +10,14 @@ const buildDir = {
 const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = {
-  entry: [
-    './src/index.js'
-  ],
+  entry: {
+    'panel': './src/index.js',
+    'popup': './src/popup/index.js'
+  },
   output: {
     path: buildDir.chrome,
     publicPath: '/',
-    filename: 'panel.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -27,7 +28,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/panel-template.html',
-      filename: 'panel.html'
+      filename: 'panel.html',
+      chunks: ['panel']
     }),
     new NamedModulesPlugin
   ],
