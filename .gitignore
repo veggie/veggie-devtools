@@ -4,3 +4,5 @@ node_modules
 dist/chrome/panel.html
 dist/chrome/panel.js
 dist/chrome/panel.js.map
+dist/chrome/popup.js
+dist/chrome/popup.js.map
