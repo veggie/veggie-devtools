@@ -1,5 +1,10 @@
 <template>
-  <div class='abc' v-on:click="select">{{ JSON.stringify(item) }}</div>
+  <div class="Selectable-list" v-on:click="select">
+    {{ item.label }}
+    <span class="Content-right">
+      <slot></slot>
+    </span>
+  </div>
 </template>
 
 <script>
@@ -15,9 +20,17 @@
 
 <style scoped>
   :root {
-    --linkBg: lightblue;
+    --listBg: lightblue;
   }
-  .abc {
-    background-color: var(--linkBg);
+
+  .Selectable-list {
+    background-color: var(--listBg);
+    display: inline-block;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .Content-right {
+    float: right;
   }
 </style>

@@ -2,12 +2,10 @@
   <div class='Master-detail'>
     <section class='Header'>
       <h1>Veggie Dev Tools</h1>
-      <a href=""
-        :class="{ active: order === 'alpha' }"
+      <a href="" :class="{ active: order === 'alpha' }"
         @click.prevent="order = 'alpha'"
       >Alphabetically</a>
-      <a href=""
-        :class="{ active: order === 'last' }"
+      <a href="" :class="{ active: order === 'last' }"
         @click.prevent="order = 'last'"
       >By last called</a>
     </section>
@@ -17,8 +15,14 @@
           is="selectable-list"
           :item="service"
           v-on:select="select(service.id)"
-          ></li>
+        >
+          <chip v-if="service.overridden"
+            :colorKey="service.overrideType"
+            :label="service.overrideType"
+          ></chip>
+        </li>
       </ul>
+      <div v-if="fetching">Loading...</div>
       <div v-if="error">{{ error }}</div>
     </section>
     <section v-if="selectedId" class='Detail'>
@@ -30,16 +34,17 @@
 <script>
   import selectableList from './Selectable-list.vue'
   import serviceDetails from './Service-details.vue'
+  import chip from './Chip.vue'
   import * as veggie from 'veggie'
 
   export default {
     components: {
       selectableList,
-      serviceDetails
+      serviceDetails,
+      chip
     },
     data () {
       return {
-        message: 'vue app ready',
         services: [],
         fetching: true,
         error: false,
@@ -66,6 +71,9 @@
             const n = Math.random()
             this.ids.push(n)
             curr.id = n
+            curr.label = curr.status
+            curr.overridden = true
+            curr.overrideType = 'block'
             acc[n] = curr
             return acc
           }, {})
@@ -85,17 +93,9 @@
       'master detail detail';
   }
 
-  section.Header {
-    grid-area: header;
-  }
-
-  section.Master {
-    grid-area: master;
-  }
-
-  section.Detail {
-    grid-area: detail;
-  }
+  section.Header { grid-area: header; }
+  section.Master { grid-area: master; }
+  section.Detail { grid-area: detail; } 
 
   ul {
     margin: 0;
