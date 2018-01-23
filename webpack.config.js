@@ -11,8 +11,9 @@ const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = {
   entry: {
+    'background': './src/background.js',
     'panel': './src/index.js',
-    'popup': './src/popup/index.js'
+    'popup': './src/popup.js'
   },
   output: {
     path: buildDir.chrome,
@@ -42,8 +43,7 @@ module.exports = {
     before (app) {
       app.use(veggie.router({
         dir: 'services/index.js',
-        profileDir: 'services/profiles',
-        repl: false
+        profileDir: 'services/profiles'
       }))
     }
   },
