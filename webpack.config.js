@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const veggie = require('veggie')
-const { NamedModulesPlugin } = require('webpack')
+const { DefinePlugin, NamedModulesPlugin } = require('webpack')
 
 const HOST = 'localhost'
 const buildDir = {
@@ -12,7 +12,7 @@ const nodeModules = path.resolve(__dirname, 'node_modules')
 module.exports = {
   entry: {
     'background': './src/background.js',
-    'panel': './src/index.js',
+    'panel': './src/panel/index.js',
     'popup': './src/popup.js'
   },
   output: {
@@ -28,11 +28,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/panel-template.html',
+      template: './src/panel/template.html',
       filename: 'panel.html',
       chunks: ['panel']
     }),
-    new NamedModulesPlugin
+    new NamedModulesPlugin(),
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
   ],
   devtool: 'source-map',
   devServer: {
