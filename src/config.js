@@ -1,9 +1,3 @@
-export const chipColors = {
-  block: 'red',
-  hang: 'yellow',
-  set: 'blue'
-}
-
 export const enabledIcons = {
   16: 'icons/enabled-16.png'/*,
   48: 'icons/enabled-48.png',

@@ -14,7 +14,7 @@
         <li v-for="service in ids.map(id => serviceMap[id])"
           is="selectable-list"
           :item="service"
-          v-on:select="select(service.id)"
+          @select="select(service.id)"
         >
           <chip v-if="service.overridden"
             :colorKey="service.overrideType"
@@ -64,9 +64,10 @@
     },
     mounted: async function () {
       try {
-        const res = await veggie.showAll()
+        const res = await veggie._ping()
+        console.log(res)
         this.fetching = false
-        this.serviceMap = [await res.json()]
+        this.serviceMap = [res]
           .reduce((acc, curr) => {
             const n = Math.random()
             this.ids.push(n)
