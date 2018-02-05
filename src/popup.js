@@ -10,9 +10,9 @@ import * as veggie from 'veggie'
     veggieDetected = false
 
     try {
-      const res = await veggie.ping()
+      const { message } = await veggie.ping()
 
-      if (res.message === 'pong') {
+      if (message === 'pong') {
         veggieDetected = true
       }
     } catch (e) {
