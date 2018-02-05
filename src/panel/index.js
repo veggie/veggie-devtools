@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './components/App.vue'
-import { getTab } from '../common'
+import { getActiveTab } from '../common'
 import * as veggie from 'veggie'
 
 Vue.use(Vuex)
@@ -84,7 +84,7 @@ console.log('env', process.env.NODE_ENV)
   try {
     if (process.env.NODE_ENV === 'production') {
       // Use tab's origin for the base for each fetch request
-      const tab = await getTab()
+      const tab = await getActiveTab()
       const { origin } = new URL(tab.url)
       veggie.setApiOrigin(origin)
     }
@@ -96,6 +96,7 @@ console.log('env', process.env.NODE_ENV)
       store.dispatch('getServices')
     }
   } catch (error) {
+    console.error(error)
     store.commit('error', { error })
   }
 })()
