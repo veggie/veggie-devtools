@@ -6,6 +6,10 @@ html, body {
   min-height: 100%;
 }
 
+body {
+  background-color: white;
+}
+
 *, *:after, *:before {
   box-sizing: border-box;
 }
