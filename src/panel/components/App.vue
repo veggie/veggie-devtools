@@ -8,25 +8,30 @@
       <a href="" :class="{ active: order === 'last' }"
         @click.prevent="order = 'last'"
       >By last called</a>
+      <button @click='resetProfile'>Reset</button>
     </section>
     <section class='Master'>
       <ul v-if="!fetching && !error">
-        <li v-for="service in ids.map(id => serviceMap[id])"
+        <li v-for="service in services"
           is="selectable-list"
           :item="service"
           @select="select(service.id)"
         >
-          <chip v-if="service.overridden"
-            :colorKey="service.overrideType"
-            :label="service.overrideType"
+          <chip v-if="service.override"
+            colorKey="status"
+            :label="service.override.status"
+          ></chip>
+          <chip v-if="service.override && service.override.hang"
+            colorKey="hang"
+            label="Hang"
           ></chip>
         </li>
       </ul>
       <div v-if="fetching">Loading...</div>
       <div v-if="error">{{ error }}</div>
     </section>
-    <section v-if="selectedId" class='Detail'>
-      <service-details :service="serviceMap[selectedId]" />
+    <section v-if="selectedService" class='Detail'>
+      <service-details :service="selectedService" />
     </section>
   </div>
 </template>
@@ -35,6 +40,7 @@
   import selectableList from './Selectable-list.vue'
   import serviceDetails from './Service-details.vue'
   import chip from './Chip.vue'
+  import { mapActions, mapGetters } from 'vuex'
   import * as veggie from 'veggie'
 
   export default {
@@ -45,15 +51,23 @@
     },
     data () {
       return {
-        services: [],
-        fetching: true,
-        error: false,
         order: 'alpha',
-        ids: [],
         selectedId: null
       }
     },
-    methods: {
+    computed: Object.assign({
+      selectedService () {
+        return this.$store.getters.getServiceById(this.selectedId)
+      }
+    },
+      mapGetters([
+        'detected',
+        'services',
+        'fetching',
+        'error'
+      ])
+    ),
+    methods: Object.assign({
       select (id) {
         if (this.selectedId === id) {
           this.selectedId = null
@@ -62,31 +76,14 @@
         }
       }
     },
-    mounted: async function () {
-      try {
-        const res = await veggie._ping()
-        console.log(res)
-        this.fetching = false
-        this.serviceMap = [res]
-          .reduce((acc, curr) => {
-            const n = Math.random()
-            this.ids.push(n)
-            curr.id = n
-            curr.label = curr.status
-            curr.overridden = true
-            curr.overrideType = 'block'
-            acc[n] = curr
-            return acc
-          }, {})
-      } catch (e) {
-        console.error(e)
-        this.error = e
-      }
-    }
+      mapActions(['resetProfile'])
+    )
   }
 </script>
 
 <style scoped>
+  @import '../root.css';
+
   .Master-detail {
     display: grid;
     grid-template-areas:
@@ -97,9 +94,4 @@
   section.Header { grid-area: header; }
   section.Master { grid-area: master; }
   section.Detail { grid-area: detail; } 
-
-  ul {
-    margin: 0;
-    padding: 0;
-  }
 </style>

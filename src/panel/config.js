@@ -1,5 +1,6 @@
 export const chipColors = {
   block: 'red',
   hang: 'yellow',
-  set: 'blue'
+  set: 'blue',
+  status: 'green'
 }

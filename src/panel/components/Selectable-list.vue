@@ -1,5 +1,5 @@
 <template>
-  <div class="Selectable-list" v-on:click="select">
+  <div class="Selectable-list" @click="select">
     {{ item.label }}
     <span class="Content-right">
       <slot></slot>
@@ -19,15 +19,20 @@
 </script>
 
 <style scoped>
-  :root {
-    --listBg: lightblue;
+  .Selectable-list:first-child {
+    border-top: none;
   }
 
   .Selectable-list {
-    background-color: var(--listBg);
+    border-top: 2px solid var(--colorLight);
+    border-collapse: collapse;
     display: inline-block;
     padding: 5px;
     width: 100%;
+  }
+
+  .Selectable-list:hover {
+    background-color: var(--colorNeutral);
   }
 
   .Content-right {
