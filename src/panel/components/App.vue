@@ -2,35 +2,21 @@
   <div class='Master-detail'>
     <section class='Header'>
       <h1>Veggie Dev Tools</h1>
-      <a href="" :class="{ active: order === 'alpha' }"
-        @click.prevent="order = 'alpha'"
-      >Alphabetically</a>
-      <a href="" :class="{ active: order === 'last' }"
-        @click.prevent="order = 'last'"
-      >By last called</a>
+      <a href="" :class="{ active: order === 'alpha' }" @click.prevent="order = 'alpha'">Alphabetically</a>
+      <a href="" :class="{ active: order === 'last' }" @click.prevent="order = 'last'">By last called</a>
       <button @click='resetProfile'>Reset</button>
     </section>
     <section class='Master'>
       <ul v-if="!fetching && !error">
-        <li v-for="service in services"
-          is="selectable-list"
-          :item="service"
-          @select="select(service.id)"
-        >
-          <chip v-if="service.override"
-            colorKey="status"
-            :label="service.override.status"
-          ></chip>
-          <chip v-if="service.override && service.override.hang"
-            colorKey="hang"
-            label="Hang"
-          ></chip>
+        <li v-for="service in services" is="selectable-list-item" :item="service" @select="select(service.id)">
+          <chip v-if="service.override" colorKey="status" :label="service.override.status"></chip>
+          <chip v-if="service.override && service.override.hang" colorKey="hang" label="Hang"></chip>
         </li>
       </ul>
       <div v-if="fetching">Loading...</div>
       <div v-if="error">{{ error }}</div>
     </section>
-    <section v-if="selectedService" class='Detail'>
+    <section v-if="selectedService" class="Detail">
       <service-details :service="selectedService" />
     </section>
   </div>

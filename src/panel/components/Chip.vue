@@ -15,7 +15,7 @@
   }
 </script>
 
-<style scope>
+<style scoped>
   span {
     border-radius: 2px;
     padding: 2px;
