@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import selectableList from './Selectable-list.vue'
+  import selectableListItem from './Selectable-list-item.vue'
   import serviceDetails from './Service-details.vue'
   import chip from './Chip.vue'
   import { mapActions, mapGetters } from 'vuex'
@@ -45,7 +45,7 @@
 
   export default {
     components: {
-      selectableList,
+      selectableListItem,
       serviceDetails,
       chip
     },

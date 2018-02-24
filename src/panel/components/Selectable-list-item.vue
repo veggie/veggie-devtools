@@ -1,5 +1,5 @@
 <template>
-  <div class="Selectable-list" @click="select">
+  <div class="Selectable-list-item" @click="select">
     {{ item.label }}
     <span class="Content-right">
       <slot></slot>
@@ -19,11 +19,11 @@
 </script>
 
 <style scoped>
-  .Selectable-list:first-child {
+  .Selectable-list-item:first-child {
     border-top: none;
   }
 
-  .Selectable-list {
+  .Selectable-list-item {
     border-top: 2px solid var(--colorLight);
     border-collapse: collapse;
     display: inline-block;
@@ -31,7 +31,7 @@
     width: 100%;
   }
 
-  .Selectable-list:hover {
+  .Selectable-list-item:hover {
     background-color: var(--colorNeutral);
   }
 
