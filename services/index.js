@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
   '/posts': {
     d: {
@@ -23,5 +24,10 @@ module.exports = {
     d: {
       title: 'first',
     }
+  },
+  '/users': path.join(__dirname, './data/users.json'),
+  '/users/1': path.join(__dirname, './data/user1.json'),
+  '/getUser': (req, res) => {
+    res.status(301).json({})
   }
 }
