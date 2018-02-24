@@ -7,7 +7,7 @@
       <span>{{ service.url.full }}</span>
     </div>
     <div v-if="service.type === 'object'" class='Service-response--object'>{{ JSON.stringify(service.response, null, 2) }}</div>
-    <div v-if="service.type === 'path'" class='Service-response--path'>{{ service.response }}</div>
+    <div v-if="service.type === 'string'" class='Service-response--path'>{{ service.response }}</div>
     <div v-if="service.type === 'function'" class='Service-response--function'>{{ service.response }}</div>
   </div>
 </template>
