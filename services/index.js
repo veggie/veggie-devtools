@@ -29,5 +29,7 @@ module.exports = {
   '/users/1': path.join(__dirname, './data/user1.json'),
   '/getUser': (req, res) => {
     res.status(301).json({})
-  }
+  },
+  '/search?q=1': { d: 'found' },
+  '/search?q=2': { d: 'not found' }
 }
