@@ -9,8 +9,16 @@
   "devtools_page": "page.html",
 
   "browser_action": {
-    "default_icon": "icons/disabled-16.png",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/disabled-16.png",
+      "32": "icons/disabled-32.png"
+    }
+  },
+
+  "icons": {
+    "16": "icons/enabled-16.png",
+    "32": "icons/enabled-32.png"
   },
 
   "background": {
