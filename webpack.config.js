@@ -1,18 +1,20 @@
-const path = require('path')
+const c2k = require('koa-connect')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const veggie = require('veggie')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { resolve } = require('path')
 const { DefinePlugin, NamedModulesPlugin } = require('webpack')
+const veggie = require('veggie')
 
 const HOST = 'localhost'
 const buildDir = {
-  chrome: path.resolve(__dirname, 'dist/chrome')
+  chrome: resolve(__dirname, 'dist/chrome')
 }
-const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = {
+  mode: 'development',
   entry: {
     'background': './src/background.js',
-    'panel': './src/panel/index.js',
+    'panel': './src/panel.js',
     'popup': './src/popup.js'
   },
   output: {
@@ -22,32 +24,51 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.vue$/, loader: 'vue-loader' },
-      { test: /\.css/, use: ['style-loader', 'postcss-loader'] }
+      { test: /\.jsx?$/, use: [ 'babel-loader' ] },
+      { test: /\.css$/, use: [ MiniCssExtractPlugin.loader, "css-loader" ]}
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/panel/template.html',
+      template: './src/panel-template.html',
       filename: 'panel.html',
       chunks: ['panel']
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/popup-template.html',
+      filename: 'popup.html',
+      chunks: ['popup']
     }),
     new NamedModulesPlugin(),
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     })
   ],
   devtool: 'source-map',
-  devServer: {
-    index: 'panel.html',
+  serve: {
     host: HOST,
-    contentBase: [ buildDir.chrome ],
-    publicPath: '/',
-    before (app) {
-      app.use(veggie.router({
-        dir: 'services/index.js',
-        profileDir: 'services/profiles'
-      }))
+    hot: false,
+    content: [ buildDir.chrome ],
+    dev: {
+      index: 'panel.html',
+      publicPath: '/'
+    },
+    add (app, middleware) {
+      middleware.webpack()
+      middleware.content()
+
+      app.use(
+        c2k(
+          veggie.router({
+            dir: 'services/index.js',
+            profileDir: 'services/profiles'
+          })
+        )
+      )
     }
-  },
+  }
 }

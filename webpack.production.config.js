@@ -1,18 +1,17 @@
-const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { resolve } = require('path')
 const { DefinePlugin } = require('webpack')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const HOST = 'localhost'
 const buildDir = {
-  chrome: path.resolve(__dirname, 'dist/chrome')
+  chrome: resolve(__dirname, 'dist/chrome')
 }
-const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = {
+  mode: 'production',
   entry: {
     'background': './src/background.js',
-    'panel': './src/panel/index.js',
+    'panel': './src/panel.js',
     'popup': './src/popup.js'
   },
   output: {
@@ -22,19 +21,27 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.vue$/, loader: 'vue-loader' },
-      { test: /\.css/, use: ['style-loader', 'postcss-loader'] }
+      { test: /\.jsx?$/, use: [ 'babel-loader' ] },
+      { test: /\.css$/, use: [ MiniCssExtractPlugin.loader, "css-loader" ]}
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/panel/template.html',
+      template: './src/popup-template.html',
+      filename: 'popup.html',
+      chunks: ['popup']
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/panel-template.html',
       filename: 'panel.html',
       chunks: ['panel']
     }),
     new DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new UglifyJsPlugin()
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
   ]
 }
