@@ -8,3 +8,8 @@ dist/chrome/popup.js
 dist/chrome/popup.js.map
 dist/chrome/background.js
 dist/chrome/background.js.map
+
+# distributed zip
+dist/chrome/extension.zip
+dist/chrome.crx
+dist/chrome.pem
