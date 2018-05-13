@@ -1,0 +1,22 @@
+{
+  "/posts": {
+    "status": 404,
+    "response": {}
+  },
+  "/posts/1": {
+    "status": 404,
+    "response": {}
+  },
+  "/posts/1/title": {
+    "status": 404,
+    "response": {}
+  },
+  "/users": {
+    "status": 404,
+    "response": {}
+  },
+  "/users/1": {
+    "status": 404,
+    "response": {}
+  }
+}
