@@ -7,6 +7,6 @@ Veggie devtools extension for affecting dev server responses
 
 ```bash
 $ npm i
-$ npm run demo
+$ npm start
 *Project is running at http://localhost:8080/*
 ```
