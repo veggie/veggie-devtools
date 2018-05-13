@@ -1,30 +1,46 @@
-import { getActiveUrl, getFromBackground, isBoolean, setInBackground, toggleActiveIcon } from './common'
-import * as veggie from 'veggie'
+import initApp from './app/index.jsx'
+import VeggiePopup from './app/components/VeggiePopup/VeggiePopup.jsx'
 
-;(async function () {
-  const { origin } = await getActiveUrl()
-  let veggieDetected = await getFromBackground(origin)
-
-  if (!isBoolean(veggieDetected)) {
-    veggie.setApiOrigin(origin)
-    veggieDetected = false
-
-    try {
-      const { message } = await veggie.ping()
-
-      if (message === 'pong') {
-        veggieDetected = true
+/*
+<!doctype html>
+<html>
+  <head>
+    <title>Veggie Chrome Extension Dev Tool</title>
+    <style>
+      .Veggie-popup {
+        display: inline-block;
+        min-width: 200px;
+        text-align: center;
       }
-    } catch (e) {
-      veggieDetected = false
-    }
 
-    setInBackground(origin, veggieDetected)
-  }
+      .Veggie-message--success,
+      .Veggie-message--failed {
+        display: none;
+      }
 
-  const popup = document.getElementById('veggie-popup')
-  popup.classList.toggle('success', veggieDetected)
-  popup.classList.toggle('failed', !veggieDetected)
-  toggleActiveIcon(veggieDetected)
-})()
+      .Veggie-popup.success .Veggie-message--success {
+        display: inline-block;
+      }
+
+      .Veggie-popup.failed .Veggie-message--failed {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <meta charset="utf-8">
+    <div id="veggie-popup" class="Veggie-popup">
+      <p class="Veggie-message Veggie-message--failed">
+        Veggie not detected...
+      </p>
+      <p class="Veggie-message Veggie-message--success">
+        Veggie detected! Open DevTools and look for the Veggie panel.
+      </p>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
+*/
+
+initApp(VeggiePopup)
 

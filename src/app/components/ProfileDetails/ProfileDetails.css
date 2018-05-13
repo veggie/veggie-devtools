@@ -1,0 +1,10 @@
+.Profile-details {
+  margin-bottom: 5px;
+  padding: 2px 0;
+}
+
+.Profile-details--json {
+  background-color: var(--colorNeutral);
+  display: block;
+  white-space: pre;
+}
