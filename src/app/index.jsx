@@ -33,7 +33,9 @@ async function initialize () {
         toggleActiveIcon(true)
         setInBackground(origin, true)
       })
-      getData()
+      await getData()
+    } else {
+      throw new Error('ping not implemented')
     }
   } catch (error) {
     console.error(`Error detecting veggie: ${error}`)
