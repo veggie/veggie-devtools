@@ -9,7 +9,6 @@ export default function ProfileDetails (props) {
       {props.is_current ? <p>CURRENT</p> : ''}
       <p>Require path: {props.profile.requirePath}</p>
       {props.profile.data ? <pre className="Profile-details--json">{JSON.stringify(props.profile.data, null, 2)}</pre> : ''}
-      <button onClick={() => props.load(props.profile.id)}>Load</button>
     </div>
   )
 }

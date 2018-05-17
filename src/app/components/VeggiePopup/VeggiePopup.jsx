@@ -20,7 +20,9 @@ export default class VeggiePopup extends React.Component {
     this.loadProfile = this.loadProfile.bind(this)
   }
 
-  select (id) {
+  select (id, event) {
+    event.preventDefault()
+    event.stopPropagation()
     if (this.state.selectedId === id) {
       this.setState({ selectedId: null })
     } else {
@@ -73,7 +75,7 @@ export default class VeggiePopup extends React.Component {
             <button onClick={this.clickReset}>Reset</button>
             <ul>
               {this.props.profileIds.map(id =>
-                <li className="Selectable-list-item" onClick={this.select.bind(this, id)} key={id}>
+                <li className="Selectable-list-item" onClick={this.loadProfile.bind(this, id)} key={id}>
                   {this.props.profilesById[id].name}
                   {this.props.currentProfile === id ? <span className="Content-right">CURRENT</span> : ''}
                 </li>
