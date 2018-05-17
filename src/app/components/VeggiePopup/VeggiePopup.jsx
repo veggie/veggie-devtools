@@ -18,6 +18,7 @@ export default class VeggiePopup extends React.Component {
     this.clickBack = this.clickBack.bind(this)
     this.clickReset = this.clickReset.bind(this)
     this.loadProfile = this.loadProfile.bind(this)
+    this.loadCurrentProfile = this.loadCurrentProfile.bind(this)
   }
 
   select (id, event) {
@@ -45,6 +46,10 @@ export default class VeggiePopup extends React.Component {
     this.props.getData()
   }
 
+  loadCurrentProfile () {
+    return this.loadProfile(this.state.selectedId)
+  }
+
   render () {
     let section
 
@@ -55,7 +60,9 @@ export default class VeggiePopup extends React.Component {
     if (this.props.status.error) {
       section = (
         <div>
-          <button onClick={this.props.getData}>Try again</button>
+          <div className="Popup-accessory">
+            <button onClick={this.props.getData}>Try again</button>
+          </div>
           {this.props.status.errorMessage}
         </div>
       )
@@ -64,20 +71,26 @@ export default class VeggiePopup extends React.Component {
     if (this.props.status.ok) {
       if (this.state.selectedId) {
         section = (
-          <div className="Detail">
-            <button onClick={this.clickBack}>Back</button>
-            <ProfileDetails profile={this.props.profilesById[this.state.selectedId]} is_current={this.props.currentProfile === this.state.selectedId} load={this.loadProfile} />
+          <div>
+            <div className="Popup-accessory">
+              <button onClick={this.clickBack}>Back</button>
+              {this.state.selectedId ? <button className="Content-right" onClick={this.loadCurrentProfile}>Load</button> : ''}
+            </div>
+            <ProfileDetails profile={this.props.profilesById[this.state.selectedId]} is_current={this.props.currentProfile === this.state.selectedId} />
           </div>
         )
       } else {
         section = (
           <div>
-            <button onClick={this.clickReset}>Reset</button>
+            <div className="Popup-accessory">
+              <button onClick={this.clickReset}>Reset</button>
+            </div>
             <ul>
               {this.props.profileIds.map(id =>
                 <li className="Selectable-list-item" onClick={this.loadProfile.bind(this, id)} key={id}>
                   {this.props.profilesById[id].name}
-                  {this.props.currentProfile === id ? <span className="Content-right">CURRENT</span> : ''}
+                  <a href="#" className="Content-right Content-action" onClick={this.select.bind(this, id)}>Details</a>
+                  {this.props.currentProfile === id ? <span className="Content-right Content-info">CURRENT</span> : ''}
                 </li>
               )}
             </ul>
@@ -87,9 +100,9 @@ export default class VeggiePopup extends React.Component {
     }
 
     return (
-      <div className='Popup'>
-        <h1>Veggie Dev Tools</h1>
-        <section>{section}</section>
+      <div className="Popup">
+        <h1 className="Popup-header">veggie dev tools</h1>
+        <section className="Popup-section">{section}</section>
       </div>
     )
   }

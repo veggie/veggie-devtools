@@ -3,6 +3,10 @@
   padding: 2px 0;
 }
 
+.Profile-details h1 .Content-info {
+  margin: 0 5px;
+}
+
 .Profile-details--json {
   background-color: var(--colorNeutral);
   display: block;
