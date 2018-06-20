@@ -6,7 +6,7 @@ Veggie devtools extension for affecting dev server responses
 ## Installation
 
 ```bash
-git clone https://github.com/micburks/veggie-devtools.git
+git clone https://github.com/veggie/veggie-devtools.git
 cd veggie-devtools
 npm i
 npm run build
