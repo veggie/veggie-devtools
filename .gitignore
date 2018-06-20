@@ -2,8 +2,10 @@ node_modules
 
 # build files
 dist/chrome/panel.html
+dist/chrome/panel.css
 dist/chrome/panel.js
 dist/chrome/panel.js.map
+dist/chrome/popup.css
 dist/chrome/popup.js
 dist/chrome/popup.js.map
 dist/chrome/background.js
