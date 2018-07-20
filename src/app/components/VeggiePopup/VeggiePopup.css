@@ -1,48 +1,94 @@
 .Popup {
-  min-width: 350px;
+  min-width: 400px;
 }
 
 .Popup-header {
-  background-color: var(--colorVeggie);
+  background-color: #fff;
   color: var(--colorDark);
-  padding: 10px;
-  font-variant: small-caps;
+  padding: 1.2rem 1rem 1rem;
 }
 
 .Popup-accessory {
-  border-bottom: 2px solid var(--colorLight);
+  /* border-bottom: 2px solid var(--colorLight); */
+  margin-left: 0.5rem; 
 }
 
-.Popup-accessory button {
+.Profile-list {
+  margin-top: 1em;
+}
+
+.Button {
   border: none;
-  border: 2px solid var(--colorLight);
-  border-radius: 2px;
-  color: var(--colorVeggie);
+  border-radius: 10em;
+  color: #fff;
   margin: 5px;
-  padding: 8px 10px;
+  padding: 0.25em 1.2em;
+  font-weight: 400;
 }
 
-.Popup-accessory button:hover {
-  background-color: var(--colorLight);
+.Button--primary {
+ background: linear-gradient(115deg, tomato, orangered);
 }
 
-.Selectable-list-item {
-  border-bottom: 2px solid var(--colorLight);
+.Button--secondary {
+  border: 2px solid var(--color-veggie);
   color: var(--colorDark);
-  display: inline-block;
-  padding: 8px;
-  width: 100%;
+  padding: 0;
 }
 
-.Selectable-list-item:hover {
-  background-color: var(--colorLight);
+.List-item--selectable {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.Selectable-list-item .Content-action {
+/* .List-item--selectable:before {
+  content: '';
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--colorVeggie);
+  transition: transform 0.3s ease-in;
+
+} */
+
+.List-item--selectable:hover {
+  text-decoration: underline;
+}
+
+.List-item--selectable:after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  right: -6rem;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 10em;
+  background-color: var(--colorVeggie);
+  opacity: 0;
+  transition: top, right, opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: cubic-bezier(0.86, 0.45, 1, 0.74);
+}
+
+.List-item--selectable:hover:after {
+  top: -2rem;
+  right: -3rem;
+  opacity: 1;
+}
+
+.List-item--selectable .Content-action {
   display: none;
 }
 
-.Selectable-list-item:hover .Content-action {
+.List-item--selectable:hover .Content-action {
   display: inline-block;
 }
 
@@ -55,9 +101,10 @@
   color: var(--colorVeggie);
 }
 
-.Content-action {
-  color: var(--colorNeutral);
+.List-itemDetails {
+  color: #fff;
   text-decoration: none;
+  z-index: 1;
 }
 
 .Content-action:hover {

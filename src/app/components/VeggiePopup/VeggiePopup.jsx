@@ -73,8 +73,8 @@ export default class VeggiePopup extends React.Component {
         section = (
           <div>
             <div className="Popup-accessory">
-              <button onClick={this.clickBack}>Back</button>
-              {this.state.selectedId ? <button className="Content-right" onClick={this.loadCurrentProfile}>Load</button> : ''}
+              <button className="Button Button--primary" onClick={this.clickBack}>Back</button>
+              {this.state.selectedId ? <button className="Button Button--secondary Content-right" onClick={this.loadCurrentProfile}>Load</button> : ''}
             </div>
             <ProfileDetails profile={this.props.profilesById[this.state.selectedId]} is_current={this.props.currentProfile === this.state.selectedId} />
           </div>
@@ -83,13 +83,14 @@ export default class VeggiePopup extends React.Component {
         section = (
           <div>
             <div className="Popup-accessory">
-              <button onClick={this.clickReset}>Reset</button>
+              <button className="Button Button--primary" onClick={this.clickReset}>Reset</button>
             </div>
-            <ul>
-              {this.props.profileIds.map(id =>
-                <li className="Selectable-list-item" onClick={this.loadProfile.bind(this, id)} key={id}>
+            <h2>Current Profiles</h2>
+            <ul className="Profile-list">
+              {this.props.profileIds.map(id =>           
+                <li className="List-item--selectable {className}" onClick={this.loadProfile.bind(this, id)} key={id}>
                   {this.props.profilesById[id].name}
-                  <a href="#" className="Content-right Content-action" onClick={this.select.bind(this, id)}>Details</a>
+                  <a href="#" className="List-itemDetails Button Button--secondary" onClick={this.select.bind(this, id)}>Details</a>
                   {this.props.currentProfile === id ? <span className="Content-right Content-info">CURRENT</span> : ''}
                 </li>
               )}
@@ -101,7 +102,9 @@ export default class VeggiePopup extends React.Component {
 
     return (
       <div className="Popup">
-        <h1 className="Popup-header">veggie dev tools</h1>
+        <header className="Popup-header">
+          <h1>Veggie</h1>
+        </header>
         <section className="Popup-section">{section}</section>
       </div>
     )

@@ -1,4 +1,5 @@
 @import './reset.css';
+@import './typography.css';
 
 html, body {
   height: 100%;
@@ -22,6 +23,6 @@ ul {
 :root {
   --colorLight: rgba(0, 0, 0, .1);
   --colorNeutral: rgba(0, 0, 0, .3);
-  --colorDark: rgba(0, 0, 0, .7);
-  --colorVeggie: green;
+  --colorDark: rgba(43, 19, 6, 1);
+  --colorVeggie: tomato;
 }

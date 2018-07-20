@@ -47,6 +47,19 @@ table {
 	border-spacing: 0;
 }
 
+h1, h2, h3, h4, h5, h6, p, ul, li, a, button {
+    font-size: 1rem;
+    color: var(--color-dark);
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 1.5em;
+    letter-spacing: -0.02em;
+}
+
+
 html, body {
   height: 100%;
   margin: 0;
@@ -67,48 +80,131 @@ ul {
 }
 
 :root {
-  --colorLight: lightblue;
-  --colorNeutral: lightgray;
+  --colorLight: rgba(0, 0, 0, .1);
+  --colorNeutral: rgba(0, 0, 0, .3);
+  --colorDark: rgba(43, 19, 6, 1);
+  --colorVeggie: tomato;
 }
 
 .Popup {
-  min-width: 350px;
+  min-width: 500px;
 }
 
-.Master-detail {
-  display: grid;
-  grid-template-areas:
-  'header header header'
-  'master detail detail';
+.Popup-header {
+  background-color: #fff;
+  color: var(--colorDark);
+  padding: 2rem 1rem 1rem;
 }
 
-section.Header { grid-area: header; }
-section.Master { grid-area: master; }
-section.Detail { grid-area: detail; } 
-
-.Selectable-list-item:first-child {
-  border-top: none;
+.Popup-accessory {
+  /* border-bottom: 2px solid var(--colorLight); */
 }
 
-.Selectable-list-item {
-  border-top: 2px solid var(--colorLight);
-  border-collapse: collapse;
+.Profile-list {
+  margin-top: 1em;
+}
+
+.Button {
+  border: none;
+  border-radius: 10em;
+  color: #fff;
+  margin: 5px;
+  padding: 0.5em 1.5em;
+  font-weight: 500;
+}
+
+.Button--primary {
+ background: linear-gradient(115deg, tomato, orangered);
+}
+
+.Button--secondary {
+  border: 2px solid var(--color-veggie);
+  color: var(--colorDark);
+  padding: 0;
+}
+
+.List-item--selectable {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* .List-item--selectable:before {
+  content: '';
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--colorVeggie);
+  transition: transform 0.3s ease-in;
+
+} */
+
+.List-item--selectable:hover {
+  text-decoration: underline;
+}
+
+.List-item--selectable:after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  right: -6rem;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 10em;
+  background-color: var(--colorVeggie);
+  opacity: 0;
+  transition: top, right, opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: cubic-bezier(0.86, 0.45, 1, 0.74);
+}
+
+.List-item--selectable:hover:after {
+  top: -2rem;
+  right: -3rem;
+  opacity: 1;
+}
+
+.List-item--selectable .Content-action {
+  display: none;
+}
+
+.List-item--selectable:hover .Content-action {
   display: inline-block;
-  padding: 5px;
-  width: 100%;
-}
-
-.Selectable-list-item:hover {
-  background-color: var(--colorNeutral);
 }
 
 .Content-right {
+  margin: 0 5px;
   float: right;
+}
+
+.Content-info {
+  color: var(--colorVeggie);
+}
+
+.List-itemDetails {
+  color: #fff;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.Content-action:hover {
+  color: var(--colorDark);
 }
 
 .Profile-details {
   margin-bottom: 5px;
   padding: 2px 0;
+}
+
+.Profile-details h1 .Content-info {
+  margin: 0 5px;
 }
 
 .Profile-details--json {
