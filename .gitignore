@@ -4,8 +4,10 @@ node_modules
 dist/chrome/panel.html
 dist/chrome/panel.js
 dist/chrome/panel.js.map
+dist/chrome/panel.css
 dist/chrome/popup.js
 dist/chrome/popup.js.map
+dist/chrome/popup.css
 dist/chrome/background.js
 dist/chrome/background.js.map
 
