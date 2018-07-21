@@ -2,7 +2,7 @@ import './VeggiePopup.css'
 import ProfileDetails from '../ProfileDetails/ProfileDetails.jsx'
 import * as veggieApi from 'veggie'
 import React from 'react'
-import HeaderActions from '../HeaderActions/HeaderActions.jsx'
+import Header from '../Header/Header.jsx'
 
 export default class VeggiePopup extends React.Component {
   constructor (props) {
@@ -52,31 +52,51 @@ export default class VeggiePopup extends React.Component {
   }
 
   render () {
-    let section
+    let header, section
 
     if (this.props.status.fetching) {
+      header = <Header headerText="Veggie"/>
       section = 'Loading...'
     }
     
     if (this.props.status.error) {
-      section = (
-        <div>
-          <div className="Popup-accessory">
-            <button onClick={this.props.getData}>Try again</button>
-          </div>
-          {this.props.status.errorMessage}
-        </div>
+      header = (
+        <Header
+          headerText="Veggie"
+          primaryActionText="Try again"
+          primaryAction={this.props.getData}
+        />
       )
+
+      section = this.props.status.errorMessage
     }
-    
+
     if (this.props.status.ok) {
       if (this.state.selectedId) {
+        header = (
+          <Header
+            primaryActionText="Back"
+            primaryAction={this.clickBack}
+            secondaryActionText="Load"
+            secondaryAction={this.loadCurrentProfile}
+          />
+        )
+
         section = (
-          <div>
-            <ProfileDetails profile={this.props.profilesById[this.state.selectedId]} is_current={this.props.currentProfile === this.state.selectedId} />
-          </div>
+          <ProfileDetails
+            profile={this.props.profilesById[this.state.selectedId]}
+            is_current={this.props.currentProfile === this.state.selectedId}
+          />
         )
       } else {
+        header = (
+          <Header
+            headerText="Veggie"
+            primaryActionText="Reset"
+            primaryAction={this.clickReset}
+          />
+        )
+
         section = (
           <div>
             <h2>Current Profiles</h2>
@@ -96,20 +116,10 @@ export default class VeggiePopup extends React.Component {
 
     return (
       <div className="Popup">
-        {(this.props.status.ok && this.state.selectedId) ?
-            <HeaderActions
-              primaryActionText="Back"
-              primaryAction={this.clickBack}
-              secondaryActionText="Load"
-              secondaryAction={this.loadCurrentProfile}
-            /> :
-            <HeaderActions
-              headerText="Veggie"
-              primaryActionText="Reset"
-              primaryAction={this.clickReset}
-            />
-        }
-        <section className="Popup-section">{section}</section>
+        {header}
+        <section className="Popup-section">
+          {section}
+        </section>
       </div>
     )
   }

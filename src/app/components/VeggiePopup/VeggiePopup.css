@@ -2,17 +2,6 @@
   min-width: 400px;
 }
 
-.Popup-header {
-  background-color: #fff;
-  color: var(--colorDark);
-  padding: 1.2rem 1rem 1rem;
-}
-
-.Popup-accessory {
-  /* border-bottom: 2px solid var(--colorLight); */
-  margin-left: 0.5rem; 
-}
-
 .Profile-list {
   margin-top: 1em;
 }
