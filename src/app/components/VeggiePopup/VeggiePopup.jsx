@@ -2,6 +2,7 @@ import './VeggiePopup.css'
 import ProfileDetails from '../ProfileDetails/ProfileDetails.jsx'
 import * as veggieApi from 'veggie'
 import React from 'react'
+import HeaderActions from '../HeaderActions/HeaderActions.jsx'
 
 export default class VeggiePopup extends React.Component {
   constructor (props) {
@@ -72,19 +73,12 @@ export default class VeggiePopup extends React.Component {
       if (this.state.selectedId) {
         section = (
           <div>
-            <div className="Popup-accessory">
-              <button className="Button Button--primary" onClick={this.clickBack}>Back</button>
-              {this.state.selectedId ? <button className="Button Button--secondary Content-right" onClick={this.loadCurrentProfile}>Load</button> : ''}
-            </div>
             <ProfileDetails profile={this.props.profilesById[this.state.selectedId]} is_current={this.props.currentProfile === this.state.selectedId} />
           </div>
         )
       } else {
         section = (
           <div>
-            <div className="Popup-accessory">
-              <button className="Button Button--primary" onClick={this.clickReset}>Reset</button>
-            </div>
             <h2>Current Profiles</h2>
             <ul className="Profile-list">
               {this.props.profileIds.map(id =>           
@@ -102,9 +96,19 @@ export default class VeggiePopup extends React.Component {
 
     return (
       <div className="Popup">
-        <header className="Popup-header">
-          <h1>Veggie</h1>
-        </header>
+        {(this.props.status.ok && this.state.selectedId) ?
+            <HeaderActions
+              primaryActionText="Back"
+              primaryAction={this.clickBack}
+              secondaryActionText="Load"
+              secondaryAction={this.loadCurrentProfile}
+            /> :
+            <HeaderActions
+              headerText="Veggie"
+              primaryActionText="Reset"
+              primaryAction={this.clickReset}
+            />
+        }
         <section className="Popup-section">{section}</section>
       </div>
     )
