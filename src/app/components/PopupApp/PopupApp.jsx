@@ -1,10 +1,10 @@
-import './VeggiePopup.css'
+import './PopupApp.css'
+import Header from '../Header/Header.jsx'
 import ProfileDetails from '../ProfileDetails/ProfileDetails.jsx'
 import * as veggieApi from 'veggie'
 import React from 'react'
-import Header from '../Header/Header.jsx'
 
-export default class VeggiePopup extends React.Component {
+export default class PopupApp extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

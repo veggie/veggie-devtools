@@ -1,5 +1,5 @@
 import initApp from './app/index.jsx'
-import VeggiePopup from './app/components/VeggiePopup/VeggiePopup.jsx'
+import PopupApp from './app/components/PopupApp/PopupApp.jsx'
 
-initApp(VeggiePopup)
+initApp(PopupApp)
 
