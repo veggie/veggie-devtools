@@ -6,7 +6,7 @@ export default function ProfileDetails (props) {
     <div className="Profile-details">
       <h1>
         Profile
-        {props.is_current &&
+        {props.isCurrent &&
           <span className="Content-info">CURRENT</span>
         }
       </h1>

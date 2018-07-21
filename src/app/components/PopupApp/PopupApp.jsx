@@ -12,7 +12,7 @@ export default class PopupApp extends React.Component {
         alpha: true,
         last: false
       },
-      selectedId: null
+      viewProfileId: null
     }
 
     this.select = this.select.bind(this)
@@ -25,15 +25,15 @@ export default class PopupApp extends React.Component {
   select (id, event) {
     event.preventDefault()
     event.stopPropagation()
-    if (this.state.selectedId === id) {
-      this.setState({ selectedId: null })
+    if (this.state.viewProfileId === id) {
+      this.setState({ viewProfileId: null })
     } else {
-      this.setState({ selectedId: id })
+      this.setState({ viewProfileId: id })
     }
   }
 
   clickBack () {
-    this.setState({ selectedId: null })
+    this.setState({ viewProfileId: null })
   }
 
   async clickReset () {
@@ -48,7 +48,7 @@ export default class PopupApp extends React.Component {
   }
 
   loadCurrentProfile () {
-    return this.loadProfile(this.state.selectedId)
+    return this.loadProfile(this.state.viewProfileId)
   }
 
   render () {
@@ -72,7 +72,7 @@ export default class PopupApp extends React.Component {
     }
 
     if (this.props.status.ok) {
-      if (this.state.selectedId) {
+      if (this.state.viewProfileId) {
         header = (
           <Header
             primaryActionText="Back"
@@ -84,8 +84,8 @@ export default class PopupApp extends React.Component {
 
         section = (
           <ProfileDetails
-            profile={this.props.profilesById[this.state.selectedId]}
-            is_current={this.props.currentProfile === this.state.selectedId}
+            profile={this.props.profilesById[this.state.viewProfileId]}
+            isCurrent={this.props.currentProfile === this.state.viewProfileId}
           />
         )
       } else {
@@ -102,10 +102,12 @@ export default class PopupApp extends React.Component {
             <h2>Current Profiles</h2>
             <ul className="Profile-list">
               {this.props.profileIds.map(id =>           
-                <li className="List-item--selectable {className}" onClick={this.loadProfile.bind(this, id)} key={id}>
+                <li key={id}
+                  onClick={this.loadProfile.bind(this, id)}
+                  className={`List-item--selectable ${this.props.currentProfile === id ? 'is-current' : ''}`}
+                >
                   {this.props.profilesById[id].name}
                   <a href="#" className="List-itemDetails Button Button--secondary" onClick={this.select.bind(this, id)}>Details</a>
-                  {this.props.currentProfile === id ? <span className="Content-right Content-info">CURRENT</span> : ''}
                 </li>
               )}
             </ul>

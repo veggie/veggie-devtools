@@ -81,11 +81,6 @@
   display: inline-block;
 }
 
-.Content-right {
-  margin: 0 5px;
-  float: right;
-}
-
 .Content-info {
   color: var(--colorVeggie);
 }
